@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 /// <summary>
 /// Defines a maze using a dictionary. The dictionary is provided by the
 /// user when the Maze object is created. The dictionary will contain the
@@ -9,7 +11,7 @@
 /// 'left', 'right', 'up', and 'down' are boolean are represent valid directions
 ///
 /// If a direction is false, then we can assume there is a wall in that direction.
-/// If a direction is true, then we can proceed.  
+/// If a direction is true, then we can proceed.
 ///
 /// If there is a wall, then throw an InvalidOperationException with the message "Can't go that way!".  If there is no wall,
 /// then the 'currX' and 'currY' values should be changed.
@@ -32,7 +34,12 @@ public class Maze
     /// </summary>
     public void MoveLeft()
     {
-        // FILL IN CODE
+        if (IsValidMoveByIndex(0))
+        {
+            _currX--;
+            return;
+        }
+        InvalidMoveException();
     }
 
     /// <summary>
@@ -41,7 +48,12 @@ public class Maze
     /// </summary>
     public void MoveRight()
     {
-        // FILL IN CODE
+        if (IsValidMoveByIndex(1))
+        {
+            _currX++;
+            return;
+        }
+        InvalidMoveException();
     }
 
     /// <summary>
@@ -50,7 +62,12 @@ public class Maze
     /// </summary>
     public void MoveUp()
     {
-        // FILL IN CODE
+        if (IsValidMoveByIndex(2))
+        {
+            _currY--;
+            return;
+        }
+        InvalidMoveException();
     }
 
     /// <summary>
@@ -59,7 +76,31 @@ public class Maze
     /// </summary>
     public void MoveDown()
     {
-        // FILL IN CODE
+        if (IsValidMoveByIndex(3))
+        {
+            _currY++;
+            return;
+        }
+        InvalidMoveException();
+    }
+
+    private bool IsValidMoveByIndex(int index)
+    {
+        return GetMoveForPosition()[index];
+    }
+
+    private bool[] GetMoveForPosition()
+    {
+        if (_mazeMap.ContainsKey((_currX, _currY)))
+        {
+            return _mazeMap[(_currX, _currY)];
+        }
+        throw new InvalidOperationException("Invalid position! :O. Where are you?");
+    }
+
+    private InvalidOperationException InvalidMoveException()
+    {
+        throw new InvalidOperationException("Can't go that way!");
     }
 
     public string GetStatus()

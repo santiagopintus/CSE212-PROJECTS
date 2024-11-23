@@ -7,6 +7,9 @@ public class PriorityQueueTests
     [TestMethod]
     // Scenario: Queue the following items: ("first",1),("second",1),("third",1), ("mostPriority",6),("leastPriority",0),("secondPriority",5). Remove Unqueue 3 items
     // Expected Result: Should have 3 items and the queue should be: ("second",1),("third",1),("leastPriority",0)
+    // Defect(s) Found: Enqueue was using Insert instead of Add method.
+    // Defect(s) Found: Dequeue was using  i < _queue.Count; instead of i < _queue.Count - 1;
+    // Defect(s) Found: Dequeue wasn't updating the highest priority variable.
     public void TestPriorityQueue_1()
     {
         // Arrange
@@ -36,6 +39,9 @@ public class PriorityQueueTests
     [TestMethod]
     // Scenario: The queue is empty. 
     // Expected Result: Dequeue should throw an exception.
+    // Defect(s) Found: Enqueue was using Insert instead of Add method.
+    // Defect(s) Found: Dequeue was using  i < _queue.Count; instead of i < _queue.Count - 1;
+    // Defect(s) Found: Dequeue wasn't updating the highest priority variable.
     public void TestPriorityQueue_2()
     {
         var priorityQueue = new PriorityQueue();
@@ -45,6 +51,9 @@ public class PriorityQueueTests
     [TestMethod]
     // Scenario: Enqueue items with identical priorities: ("item1", 3), ("item2", 3), ("item3", 3)
     // Expected Result: Items should be dequeued in the order they were added: "item1", "item2", "item3"
+    // Defect(s) Found: Enqueue was using Insert instead of Add method.
+    // Defect(s) Found: Dequeue was using  i < _queue.Count; instead of i < _queue.Count - 1;
+    // Defect(s) Found: Dequeue wasn't updating the highest priority variable.
     public void TestPriorityQueue_3_IdenticalPriorities()
     {
         // Arrange
@@ -63,6 +72,9 @@ public class PriorityQueueTests
     [TestMethod]
     // Scenario: Queue the following items: ("low",1),("high",5),("medium",3),("lowest",0). Remove 2 items.
     // Expected Result: After removing two items with the highest priorities, 2 items should remain, ordered by their priorities: ("medium",3), ("lowest",0)
+    // Defect(s) Found: Enqueue was using Insert instead of Add method.
+    // Defect(s) Found: Dequeue was using  i < _queue.Count; instead of i < _queue.Count - 1;
+    // Defect(s) Found: Dequeue wasn't updating the highest priority variable.
     public void TestPriorityQueue_4_MixedPriorities()
     {
         // Arrange

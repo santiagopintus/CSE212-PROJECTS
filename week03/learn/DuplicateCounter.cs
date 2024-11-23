@@ -24,7 +24,8 @@
 
     private static int CountDuplicates(int[] data)
     {
-        // Add code here.
-        return 0;
+        //HashSet only allows unique values, so there's no filtering for duplicates.
+        var uniqueItems = new HashSet<int>(data);
+        return data.Length - uniqueItems.Count;
     }
 }

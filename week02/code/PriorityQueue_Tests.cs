@@ -17,27 +17,27 @@ public class PriorityQueueTests
         priorityQueue.Enqueue("first", 1);
         priorityQueue.Enqueue("second", 1);
         priorityQueue.Enqueue("third", 1);
-        priorityQueue.Enqueue("mostPriority", 6);    // Highest priority
-        priorityQueue.Enqueue("leastPriority", 0);   // Lowest priority
-        priorityQueue.Enqueue("secondPriority", 5);  // Second highest priority
+        priorityQueue.Enqueue("mostPriority", 6); // Highest priority
+        priorityQueue.Enqueue("leastPriority", 0); // Lowest priority
+        priorityQueue.Enqueue("secondPriority", 5); // Second highest priority
 
         // Act & Assert: Dequeue based on priority
-        Assert.AreEqual("mostPriority", priorityQueue.Dequeue());  // Priority 6
+        Assert.AreEqual("mostPriority", priorityQueue.Dequeue()); // Priority 6
         Assert.AreEqual("secondPriority", priorityQueue.Dequeue()); // Priority 5
-        Assert.AreEqual("first", priorityQueue.Dequeue());         // Priority 1 (first added of 1s)
+        Assert.AreEqual("first", priorityQueue.Dequeue()); // Priority 1 (first added of 1s)
 
         // Assert the remaining count in the queue
         Assert.AreEqual(3, priorityQueue.Count); // Should have 3 items left
 
         // Continue to check remaining items
         Assert.AreEqual("second", priorityQueue.Dequeue()); // Next in line with priority 1
-        Assert.AreEqual("third", priorityQueue.Dequeue());  // Next in line with priority 1
+        Assert.AreEqual("third", priorityQueue.Dequeue()); // Next in line with priority 1
         Assert.AreEqual("leastPriority", priorityQueue.Dequeue()); // Lowest priority 0
         Assert.AreEqual(0, priorityQueue.Count); // Queue should be empty now
     }
 
     [TestMethod]
-    // Scenario: The queue is empty. 
+    // Scenario: The queue is empty.
     // Expected Result: Dequeue should throw an exception.
     // Defect(s) Found: Enqueue was using Insert instead of Add method.
     // Defect(s) Found: Dequeue was using  i < _queue.Count; instead of i < _queue.Count - 1;
@@ -80,18 +80,18 @@ public class PriorityQueueTests
         // Arrange
         var priorityQueue = new PriorityQueue();
         priorityQueue.Enqueue("low", 1);
-        priorityQueue.Enqueue("high", 5);      // Highest priority
+        priorityQueue.Enqueue("high", 5); // Highest priority
         priorityQueue.Enqueue("medium", 3);
-        priorityQueue.Enqueue("lowest", 0);    // Lowest priority
+        priorityQueue.Enqueue("lowest", 0); // Lowest priority
 
         // Act & Assert: Dequeue items with the highest priorities
-        Assert.AreEqual("high", priorityQueue.Dequeue());    // Priority 5
-        Assert.AreEqual("medium", priorityQueue.Dequeue());  // Priority 3
+        Assert.AreEqual("high", priorityQueue.Dequeue()); // Priority 5
+        Assert.AreEqual("medium", priorityQueue.Dequeue()); // Priority 3
 
         // Assert the remaining count and order in the queue
         Assert.AreEqual(2, priorityQueue.Count); // Should have 2 items left
-        Assert.AreEqual("low", priorityQueue.Dequeue());     // Next with priority 1
-        Assert.AreEqual("lowest", priorityQueue.Dequeue());  // Lowest priority 0
+        Assert.AreEqual("low", priorityQueue.Dequeue()); // Next with priority 1
+        Assert.AreEqual("lowest", priorityQueue.Dequeue()); // Lowest priority 0
         Assert.AreEqual(0, priorityQueue.Count); // Queue should be empty now
     }
 }
